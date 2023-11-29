@@ -37,7 +37,11 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
     //Para inspecionarmos nosso código, uma boa estratégia é utilizarmos o console.log.
     //  Com o console.log, podemos visualizar o seu conteúdo na aba Console, no inspecionador de elementos, na janela do navegador
     console.log(`id: ${idTarefa} \n titulo: ${tituloTarefa} \n descrição: ${descricaoTarefa} \n inicio: ${inicioTarefa} \n fim: ${fimTarefa} \n recurso: ${recursoTarefa} \n status: ${statusTarefa}`);
-
+    // Adicione validações antes de salvar
+    if (!tituloTarefa || !descricaoTarefa || !inicioTarefa || !fimTarefa || !recursoTarefa || !statusTarefa) {
+      alert('Preencha todos os campos antes de salvar.');
+    return;
+    }
     setTarefas(
       [...tarefas, 
         {
@@ -51,6 +55,17 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
         }
       ]);
     //console.log(`Tarefas: ` + JSON.stringify(tarefas));
+    //Limpe os campos após salvar
+    setTituloTarefa('');
+    setDescricaoTarefa('');
+    setInicioTarefa('');
+    setFimTarefa('');
+    setRecursoTarefa('');
+    setStatusTarefa('');
+
+     // Feedback visual
+    alert('Tarefa salva com sucesso!');
+
     handleClose();
   };
 
@@ -157,14 +172,16 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
   );
 }
 
+// Exemplo de personalização de cores
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '60%',
-  bgcolor: 'background.paper',
+  bgcolor: '#f0f0f0', // Altere para a cor desejada
   p: 4,
 };
+
 
 export default CriarTarefa;
